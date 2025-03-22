@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <title>Flores Amarillas</title>
+    <style>
+        /* Estilos para las ventanas emergentes */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.5s ease;
+        }
+
+        .modal-content {
+            background: linear-gradient(135deg, #87CEEB, #B0E0E6);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            animation: modalEntrance 0.5s ease-out;
+        }
+
+        .modal-content h2 {
+            color: #2c3e50;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        .modal-button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 20px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+        }
+
+        .modal-button:hover {
+            background: #2980b9;
+            transform: scale(1.05);
+        }
+
+        @keyframes modalEntrance {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Primera ventana -->
+    <div class="modal-overlay" id="firstModal">
+        <div class="modal-content">
+            <h2>Hola Susana, Alex te envía un detalle</h2>
+            <button class="modal-button" onclick="showSecondModal()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- Segunda ventana -->
+    <div class="modal-overlay hidden" id="secondModal">
+        <div class="modal-content">
+            <h2>Hola, antes de Ingresar:<br>Solo quiero recordarte<br>Lo especial que eres para mí</h2>
+            <button class="modal-button" onclick="enterMainPage()">Ingresar</button>
+        </div>
+    </div>
+
+    <!-- Contenido principal -->
+    <div class="container hidden">
+        <h1>Tal vez no sean reales, pero no te quedas sin tus flores amarillas</h1>
+        <h1>Te Quiero mucho linda <3</h1>
+        <div class="flower-container">
+            <!-- Las flores se agregarán y eliminarán aquí mediante JavaScript -->
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+    <script>
+        // Funciones para controlar las ventanas
+        function showSecondModal() {
+            document.getElementById('firstModal').classList.add('hidden');
+            document.getElementById('secondModal').classList.remove('hidden');
+        }
+
+        function enterMainPage() {
+            document.getElementById('secondModal').classList.add('hidden');
+            document.querySelector('.container').classList.remove('hidden');
+            // Iniciar animación de flores
+            startFlowerAnimation();
+        }
+
+        // Función para iniciar la animación de flores
+        let flowerInterval;
+        function startFlowerAnimation() {
+            if(!flowerInterval) {
+                flowerInterval = setInterval(createFlower, 1000);
+            }
+        }
+    </script>
+</body>
+</html>
